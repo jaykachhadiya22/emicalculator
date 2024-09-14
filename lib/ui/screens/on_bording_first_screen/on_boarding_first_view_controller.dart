@@ -1,43 +1,39 @@
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import '../../../services/app_open_ad_manager_service.dart';
-
 class OnBoardingFirstViewController extends GetxController {
   static OnBoardingFirstViewController get to =>
       Get.find<OnBoardingFirstViewController>();
 
+  BannerAd? bannerAd;
   RxBool isAdLoaded = false.obs;
-  InterstitialAd? _interstitialAd;
 
   @override
   Future<void> onInit() async {
     // TODO: implement onInit
-    // loadInterstitialAd();
+    await loadBannerAd();
     super.onInit();
   }
 
-  void loadInterstitialAd() {
-    InterstitialAd.load(
-      adUnitId: 'ca-app-pub-3940256099942544/1033173712',
+  loadBannerAd() {
+    bannerAd = BannerAd(
+      adUnitId: 'ca-app-pub-3940256099942544/6300978111',
+      size: const AdSize(width: 320, height: 50),
       request: const AdRequest(),
-      adLoadCallback: InterstitialAdLoadCallback(
-        onAdLoaded: (InterstitialAd ad) {
-          _interstitialAd = ad;
+      listener: BannerAdListener(
+        onAdLoaded: (Ad ad) {
           isAdLoaded.value = true;
-          _interstitialAd?.show();
         },
-        onAdFailedToLoad: (LoadAdError error) {
-          print('Failed to load an interstitial ad: ${error.message}');
-          isAdLoaded.value = false;
+        onAdFailedToLoad: (Ad ad, LoadAdError error) {
+          ad.dispose();
+          Future.delayed(
+            const Duration(seconds: 5),
+            () {
+              loadBannerAd();
+            },
+          );
         },
       ),
-    );
-  }
-
-  @override
-  void dispose() {
-    _interstitialAd?.dispose();
-    super.dispose();
+    )..load();
   }
 }

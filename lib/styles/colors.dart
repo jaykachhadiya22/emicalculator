@@ -36,6 +36,12 @@ class AppColors {
     end: Alignment.bottomCenter,
   );
 
+  static const Gradient lightYellowGradient = LinearGradient(
+    colors: [Color(0xFFFFDC01), Color(0xFFFA8C01)],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
+
   static const Gradient gradientTransparent = LinearGradient(
     colors: [
       Color(0x00121316),

@@ -1,11 +1,10 @@
-import 'package:emicalculator/ui/screens/credit_score_screen/credit_score_view.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 import '../../../styles/colors.dart';
 import '../../widgets/app.button.dart';
-import '../loan_calculator_screen/loan_calculator_view.dart';
+import '../select_calculator_screen/select_calculator_view.dart';
 
 class HowManyDaysLoanNeedsView extends StatelessWidget {
   const HowManyDaysLoanNeedsView({super.key});
@@ -50,7 +49,7 @@ class HowManyDaysLoanNeedsView extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                   color: AppColors.white,
                 ),
-                onPressed: () => Get.to(const LoanCalculatorView()),
+                onPressed: () => Get.to(const SelectCalculatorView()),
               ),
               const Gap(15),
               AppButton(
@@ -60,7 +59,7 @@ class HowManyDaysLoanNeedsView extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                   color: AppColors.white,
                 ),
-                onPressed: () => Get.to(const LoanCalculatorView()),
+                onPressed: () => Get.to(const SelectCalculatorView()),
               ),
               const Gap(15),
               AppButton(
@@ -70,7 +69,7 @@ class HowManyDaysLoanNeedsView extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                   color: AppColors.white,
                 ),
-                onPressed: () => Get.to(const LoanCalculatorView()),
+                onPressed: () => Get.to(const SelectCalculatorView()),
               ),
               const Gap(15),
               AppButton(
@@ -80,7 +79,7 @@ class HowManyDaysLoanNeedsView extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                   color: AppColors.white,
                 ),
-                onPressed: () => Get.to(const LoanCalculatorView()),
+                onPressed: () => Get.to(const SelectCalculatorView()),
               ),
               const Gap(15),
               AppButton(
@@ -90,7 +89,7 @@ class HowManyDaysLoanNeedsView extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                   color: AppColors.white,
                 ),
-                onPressed: () => Get.to(const LoanCalculatorView()),
+                onPressed: () => Get.to(const SelectCalculatorView()),
               ),
               const Gap(15),
               AppButton(
@@ -100,7 +99,7 @@ class HowManyDaysLoanNeedsView extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                   color: AppColors.white,
                 ),
-                onPressed: () => Get.to(const LoanCalculatorView()),
+                onPressed: () => Get.to(const SelectCalculatorView()),
               ),
             ],
           ),

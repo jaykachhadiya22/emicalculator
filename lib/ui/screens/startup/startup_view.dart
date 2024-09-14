@@ -1,8 +1,11 @@
 import 'package:emicalculator/styles/colors.dart';
+import 'package:emicalculator/ui/screens/startup/startup_view_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+
+import '../../../services/app_open_ad_manager_service.dart';
 
 class StartupView extends StatelessWidget {
   const StartupView({super.key});
@@ -21,7 +24,7 @@ class StartupView extends StatelessWidget {
               width: 210,
             ),
           ),
-           Align(
+          Align(
             alignment: Alignment.bottomCenter,
             child: const SizedBox(
               height: 22,
@@ -31,6 +34,15 @@ class StartupView extends StatelessWidget {
                 color: AppColors.orange,
               ),
             ).paddingOnly(bottom: 50),
+          ),
+          StreamBuilder(
+            stream: AppOpenAdManagerService.to.isAdAvailable.stream,
+            builder: (context, snapshot) {
+              if (AppOpenAdManagerService.to.isAdAvailable.value) {
+                StartupViewController.to.navigateAndShowAd();
+              }
+              return const SizedBox();
+            },
           ),
         ],
       ),

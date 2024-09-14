@@ -10,7 +10,7 @@ import 'app/app.bindings.dart';
 import 'data/local/get_storage.dart';
 
 Future<void> main() async {
-  var devices = ["FEFB761BA483F7737E64F2AA08C14616"];
+  var devices = ["FEFB761BA483F7737E64F2AA08C14616","66EF7F968129459770DF7F4C81B69035"];
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
   await GetStorage.init();

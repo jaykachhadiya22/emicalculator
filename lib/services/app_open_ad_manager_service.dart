@@ -9,18 +9,15 @@ class AppOpenAdManagerService {
   RxBool isAdAvailable = false.obs;
 
   Future<void> loadAd() async {
-   await AppOpenAd.load(
+    await AppOpenAd.load(
       adUnitId: 'ca-app-pub-3940256099942544/9257395921',
       request: const AdRequest(),
       adLoadCallback: AppOpenAdLoadCallback(
         onAdLoaded: (ad) {
-          print("AS LODADED : ${ad}");
           _appOpenAd = ad;
           isAdAvailable.value = true;
-          // showAdIfAvailable();
         },
         onAdFailedToLoad: (error) {
-          print("AD LOADE ERROR : ${error}");
           isAdAvailable.value = false;
         },
       ),
@@ -28,13 +25,12 @@ class AppOpenAdManagerService {
   }
 
   void showAdIfAvailable() {
-    print("Hello wored : ${isAdAvailable} ${!isAdShowing}");
     if (isAdAvailable.value && !isAdShowing) {
       _appOpenAd?.fullScreenContentCallback = FullScreenContentCallback(
         onAdDismissedFullScreenContent: (ad) {
           isAdShowing = false;
           _appOpenAd = null;
-          loadAd();
+          // loadAd();
         },
         onAdFailedToShowFullScreenContent: (ad, error) {
           isAdShowing = false;
@@ -43,7 +39,6 @@ class AppOpenAdManagerService {
           isAdShowing = true;
         },
       );
-
       _appOpenAd?.show();
     } else {
       loadAd();

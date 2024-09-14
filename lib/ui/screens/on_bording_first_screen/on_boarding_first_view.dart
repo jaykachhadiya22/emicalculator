@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../../widgets/app.button.dart';
 import 'on_boarding_first_view_controller.dart';
@@ -20,6 +21,25 @@ class OnBoardingFirstView extends StatelessWidget {
       backgroundColor: AppColors.black100,
       body: Stack(
         children: [
+          StreamBuilder(
+            stream: OnBoardingFirstViewController.to.isAdLoaded.stream,
+            builder: (context, snapshot) {
+              return OnBoardingFirstViewController.to.bannerAd == null
+                  ? const SizedBox()
+                  : SafeArea(
+                    child: Container(
+                        alignment: Alignment.bottomCenter,
+                        width: double.maxFinite,
+                        height: OnBoardingFirstViewController
+                            .to.bannerAd!.size.height
+                            .toDouble(),
+                        child: AdWidget(
+                          ad: OnBoardingFirstViewController.to.bannerAd!,
+                        ),
+                      ),
+                  ).paddingOnly(top: 10);
+            },
+          ),
           Align(
             alignment: Alignment.topCenter,
             child: SvgPicture.asset(
