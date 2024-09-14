@@ -1,3 +1,13 @@
+import 'package:emicalculator/ui/screens/calculation/basic_interest.dart';
+import 'package:emicalculator/ui/screens/calculation/car_loan_calculator.dart';
+import 'package:emicalculator/ui/screens/calculation/cash_counter.dart';
+import 'package:emicalculator/ui/screens/calculation/credit_card_payment.dart';
+import 'package:emicalculator/ui/screens/calculation/emi_calculator.dart';
+import 'package:emicalculator/ui/screens/calculation/fix_deposite.dart';
+import 'package:emicalculator/ui/screens/calculation/gst_calculator.dart';
+import 'package:emicalculator/ui/screens/calculation/loan_interest_calculator.dart';
+import 'package:emicalculator/ui/screens/calculation/mutual_fund_calculator.dart';
+import 'package:emicalculator/ui/screens/calculation/rd_calculator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
@@ -52,67 +62,87 @@ class SelectCalculatorView extends StatelessWidget {
                 children: [
                   const Gap(30),
                   singleListWidget(
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(const EmiCalculator());
+                    },
                     title: 'EMI Calculator',
                     imagePath: "calculator.svg",
                     subTitle: "A tool to calculate loan EMI easily",
                   ),
                   const Gap(20),
                   singleListWidget(
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(const MutualFundCalculator());
+                    },
                     title: 'Mutual Fund Calculator',
                     imagePath: "mutual_fund_calculator.svg",
                     subTitle: "Calculate returns on mutual fund investments.",
                   ),
                   const Gap(20),
                   singleListWidget(
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(const LoanInterestCalculator());
+                    },
                     title: 'Loan Interest Calculator',
                     subTitle: "Quickly find interest on your loan.",
                     imagePath: "loan_interest.svg",
                   ),
                   const Gap(20),
                   singleListWidget(
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(const CarLoanComparison());
+                    },
                     title: 'Car Loan Calculator',
                     subTitle: "Estimate your car loan payments.",
                     imagePath: "car_loan.svg",
                   ),
                   const Gap(20),
                   singleListWidget(
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(FixedDepositCalculator());
+                      },
                       title: 'Fixed Deposit Calculator',
                       subTitle: "Compute returns on fixed deposits.",
                       imagePath: "fix_deposit.svg"),
                   const Gap(20),
                   singleListWidget(
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(CreditCardPaymentCalculator());
+                      },
                       title: 'Credit Card Payment',
                       subTitle: "manage credit card payments.",
                       imagePath: "credit_card_payment.svg"),
                   const Gap(20),
                   singleListWidget(
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(BasicInterestCalculator());
+                      },
                       title: 'Basic Interest Calculator',
                       subTitle: "Calculate simple interest quickly.",
                       imagePath: "basic_interest.svg"),
                   const Gap(20),
                   singleListWidget(
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(GstCalculator());
+                    },
                     title: 'GST Calculator',
                     subTitle: "Determine GST on your purchases easily.",
                     imagePath: "gst_calculator.svg",
                   ),
                   const Gap(20),
                   singleListWidget(
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(CashCounter());
+                    },
                     title: 'Cash Counter',
                     subTitle: "Manage and count cash transactions.",
                     imagePath: "cash_counter.svg",
                   ),
                   const Gap(20),
                   singleListWidget(
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(RdCalculator());
+                    },
                     title: 'RD Calculator',
                     subTitle: "Calculate recurring deposit returns.",
                     imagePath: "rd.svg",
