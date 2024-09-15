@@ -123,7 +123,7 @@ class _MutualFundCalculatorState extends State<MutualFundCalculator> {
                 ),
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 20),
             AppButton(
               "Calculate",
               width: 150,
@@ -134,17 +134,15 @@ class _MutualFundCalculatorState extends State<MutualFundCalculator> {
               ),
               onPressed: _calculateMutualFund,
             ),
-            const SizedBox(height: 16),
-            _result.toStringAsFixed(2) == "0.00"
-                ? const SizedBox()
-                : Text(
-                    'Future Value: ${_result.toStringAsFixed(2)}',
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.white,
-                    ),
-                  ),
+            const SizedBox(height: 20),
+            Text(
+              'Future Value: ${_result.toStringAsFixed(2)}',
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: AppColors.white,
+              ),
+            ),
           ],
         ),
       ),

@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+
+import '../../../styles/colors.dart';
+import '../../widgets/app.button.dart';
 
 class CreditCardPaymentCalculator extends StatefulWidget {
   @override
-  _CreditCardPaymentCalculatorState createState() => _CreditCardPaymentCalculatorState();
+  _CreditCardPaymentCalculatorState createState() =>
+      _CreditCardPaymentCalculatorState();
 }
 
-class _CreditCardPaymentCalculatorState extends State<CreditCardPaymentCalculator> {
+class _CreditCardPaymentCalculatorState
+    extends State<CreditCardPaymentCalculator> {
   final TextEditingController _spendingController = TextEditingController();
   final TextEditingController _rewardRateController = TextEditingController();
   final TextEditingController _penaltyRateController = TextEditingController();
-  final TextEditingController _outstandingBalanceController = TextEditingController();
+  final TextEditingController _outstandingBalanceController =
+      TextEditingController();
 
   double _totalRewards = 0.0;
   double _totalPenalty = 0.0;
@@ -19,7 +28,8 @@ class _CreditCardPaymentCalculatorState extends State<CreditCardPaymentCalculato
     double spending = double.tryParse(_spendingController.text) ?? 0;
     double rewardRate = double.tryParse(_rewardRateController.text) ?? 0;
     double penaltyRate = double.tryParse(_penaltyRateController.text) ?? 0;
-    double outstandingBalance = double.tryParse(_outstandingBalanceController.text) ?? 0;
+    double outstandingBalance =
+        double.tryParse(_outstandingBalanceController.text) ?? 0;
 
     // Calculate rewards
     _totalRewards = (spending * rewardRate) / 100;
@@ -33,12 +43,31 @@ class _CreditCardPaymentCalculatorState extends State<CreditCardPaymentCalculato
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.black100,
       appBar: AppBar(
-        title: Text('Credit Card Payment Calculator'),
+        backgroundColor: AppColors.orange,
+        leading: GestureDetector(
+          onTap: Get.back,
+          child: SvgPicture.asset(
+            "assets/icons/left_arrow.svg",
+            height: 25,
+            width: 25,
+          ).paddingOnly(left: 15),
+        ),
+        leadingWidth: 40,
+        title: const Text(
+          'Credit Card Payment Calculator',
+          style: TextStyle(
+            color: AppColors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
@@ -60,7 +89,7 @@ class _CreditCardPaymentCalculatorState extends State<CreditCardPaymentCalculato
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: TextField(
@@ -81,7 +110,7 @@ class _CreditCardPaymentCalculatorState extends State<CreditCardPaymentCalculato
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: TextField(
@@ -102,7 +131,7 @@ class _CreditCardPaymentCalculatorState extends State<CreditCardPaymentCalculato
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: TextField(
@@ -123,19 +152,33 @@ class _CreditCardPaymentCalculatorState extends State<CreditCardPaymentCalculato
                 ),
               ),
             ),
-            SizedBox(height: 16),
-            ElevatedButton(
+            const SizedBox(height: 16),
+            AppButton(
+              "Calculate",
+              width: 150,
+              buttonTextStyle: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: AppColors.white,
+              ),
               onPressed: _calculateRewardsAndPenalties,
-              child: Text('Calculate'),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
-              'Total Monthly Rewards: $_totalRewards',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              'Total Monthly Rewards: ${_totalRewards.toStringAsFixed(2)}',
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: AppColors.white,
+              ),
             ),
             Text(
-              'Total Monthly Penalty: $_totalPenalty',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              'Total Monthly Penalty: ${_totalPenalty.toStringAsFixed(2)}',
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: AppColors.white,
+              ),
             ),
           ],
         ),

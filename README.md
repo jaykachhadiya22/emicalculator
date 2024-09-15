@@ -1,4 +1,5 @@
-# emicalculator
+# EMI Calculator - Loan Calc
+# EMI Calculator - Pay Plan EMI
 
 A new Flutter project.
 

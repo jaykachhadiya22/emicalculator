@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
-import 'dart:math'; // Importing the math library for the pow function
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'dart:math';
+
+import '../../../styles/colors.dart';
+import '../../widgets/app.button.dart'; // Importing the math library for the pow function
 
 class RdCalculator extends StatefulWidget {
   @override
@@ -16,7 +22,8 @@ class _RdCalculatorState extends State<RdCalculator> {
   // Function to calculate maturity amount
   void _calculateRd() {
     double principal = double.tryParse(_principalController.text) ?? 0;
-    double annualInterestRate = double.tryParse(_interestRateController.text) ?? 0;
+    double annualInterestRate =
+        double.tryParse(_interestRateController.text) ?? 0;
     double time = double.tryParse(_timeController.text) ?? 0;
 
     // Convert annual interest rate from percentage to decimal
@@ -26,7 +33,9 @@ class _RdCalculatorState extends State<RdCalculator> {
     int n = 12;
 
     // Calculate maturity amount using RD formula
-    double maturityAmount = principal * ((pow(1 + (rate / n), n * time) - 1) / (rate / n)) * (1 + (rate / n));
+    double maturityAmount = principal *
+        ((pow(1 + (rate / n), n * time) - 1) / (rate / n)) *
+        (1 + (rate / n));
 
     setState(() {
       _maturityAmount = maturityAmount;
@@ -36,27 +45,57 @@ class _RdCalculatorState extends State<RdCalculator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.black100,
       appBar: AppBar(
-        title: Text('RD Calculator'),
+        backgroundColor: AppColors.orange,
+        leading: GestureDetector(
+          onTap: Get.back,
+          child: SvgPicture.asset(
+            "assets/icons/left_arrow.svg",
+            height: 25,
+            width: 25,
+          ).paddingOnly(left: 15),
+        ),
+        leadingWidth: 40,
+        title: const Text(
+          'RD Calculator',
+          style: TextStyle(
+            color: AppColors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _buildTextField(_principalController, 'Monthly Deposit Amount'),
-            SizedBox(height: 16),
-            _buildTextField(_interestRateController, 'Annual Interest Rate (%)'),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
+            _buildTextField(
+                _interestRateController, 'Annual Interest Rate (%)'),
+            const SizedBox(height: 16),
             _buildTextField(_timeController, 'Time Period (Years)'),
-            SizedBox(height: 16),
-            ElevatedButton(
+            const SizedBox(height: 16),
+            AppButton(
+              "Calculate",
+              width: 150,
+              buttonTextStyle: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: AppColors.white,
+              ),
               onPressed: _calculateRd,
-              child: Text('Calculate Maturity Amount'),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               'Maturity Amount: \$${_maturityAmount.toStringAsFixed(2)}',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: AppColors.white,
+              ),
             ),
           ],
         ),

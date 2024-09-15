@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+
+import '../../../styles/colors.dart';
+import '../../widgets/app.button.dart';
 
 class CashCounter extends StatefulWidget {
+  const CashCounter({super.key});
+
   @override
   _CashCounterState createState() => _CashCounterState();
 }
@@ -11,7 +18,8 @@ class _CashCounterState extends State<CashCounter> {
   final TextEditingController _tenDollarController = TextEditingController();
   final TextEditingController _twentyDollarController = TextEditingController();
   final TextEditingController _fiftyDollarController = TextEditingController();
-  final TextEditingController _hundredDollarController = TextEditingController();
+  final TextEditingController _hundredDollarController =
+      TextEditingController();
 
   double _totalAmount = 0.0;
 
@@ -32,14 +40,32 @@ class _CashCounterState extends State<CashCounter> {
         (fiftyDollar * 50) +
         (hundredDollar * 100);
 
-    setState(() {}); // Refresh the UI with the new result
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.black100,
       appBar: AppBar(
-        title: Text('Cash Counter'),
+        backgroundColor: AppColors.orange,
+        leading: GestureDetector(
+          onTap: Get.back,
+          child: SvgPicture.asset(
+            "assets/icons/left_arrow.svg",
+            height: 25,
+            width: 25,
+          ).paddingOnly(left: 15),
+        ),
+        leadingWidth: 40,
+        title: const Text(
+          'Cash Counter',
+          style: TextStyle(
+            color: AppColors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -51,15 +77,24 @@ class _CashCounterState extends State<CashCounter> {
             _buildTextField(_twentyDollarController, '20 Dollars'),
             _buildTextField(_fiftyDollarController, '50 Dollars'),
             _buildTextField(_hundredDollarController, '100 Dollars'),
-            SizedBox(height: 16),
-            ElevatedButton(
+            const SizedBox(height: 16),
+            AppButton(
+              "Calculate",
+              width: 150,
+              buttonTextStyle: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: AppColors.white,
+              ),
               onPressed: _calculateTotal,
-              child: Text('Calculate Total'),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
-              'Total Amount: \$$_totalAmount',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              'Total Amount: \$${_totalAmount.toStringAsFixed(2)}',
+              style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.white),
             ),
           ],
         ),
@@ -88,6 +123,6 @@ class _CashCounterState extends State<CashCounter> {
           ),
         ),
       ),
-    );
+    ).paddingOnly(bottom: 16);
   }
 }
