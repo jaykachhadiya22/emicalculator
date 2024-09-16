@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../../../styles/colors.dart';
 import '../../widgets/app.button.dart';
 
 class CreditCardPaymentCalculator extends StatefulWidget {
+  const CreditCardPaymentCalculator({super.key});
+
   @override
   _CreditCardPaymentCalculatorState createState() =>
       _CreditCardPaymentCalculatorState();
@@ -23,7 +24,6 @@ class _CreditCardPaymentCalculatorState
   double _totalRewards = 0.0;
   double _totalPenalty = 0.0;
 
-  // Function to calculate monthly rewards and penalties
   void _calculateRewardsAndPenalties() {
     double spending = double.tryParse(_spendingController.text) ?? 0;
     double rewardRate = double.tryParse(_rewardRateController.text) ?? 0;
@@ -31,13 +31,11 @@ class _CreditCardPaymentCalculatorState
     double outstandingBalance =
         double.tryParse(_outstandingBalanceController.text) ?? 0;
 
-    // Calculate rewards
     _totalRewards = (spending * rewardRate) / 100;
 
-    // Calculate penalties
     _totalPenalty = (outstandingBalance * penaltyRate) / 100;
 
-    setState(() {}); // Refresh the UI with the new result
+    setState(() {});
   }
 
   @override
@@ -166,6 +164,7 @@ class _CreditCardPaymentCalculatorState
             const SizedBox(height: 16),
             Text(
               'Total Monthly Rewards: ${_totalRewards.toStringAsFixed(2)}',
+              textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -174,6 +173,7 @@ class _CreditCardPaymentCalculatorState
             ),
             Text(
               'Total Monthly Penalty: ${_totalPenalty.toStringAsFixed(2)}',
+              textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

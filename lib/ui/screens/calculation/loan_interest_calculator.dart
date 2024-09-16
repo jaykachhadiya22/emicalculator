@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'dart:math';
 
 import '../../../styles/colors.dart';
@@ -146,6 +145,7 @@ class _LoanInterestCalculatorState extends State<LoanInterestCalculator> {
             const SizedBox(height: 16),
             Text(
               'Monthly EMI: ${_emiResult.toStringAsFixed(2)}',
+              textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,

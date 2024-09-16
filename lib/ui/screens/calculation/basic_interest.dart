@@ -7,6 +7,8 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../widgets/app.button.dart';
 
 class BasicInterestCalculator extends StatefulWidget {
+  const BasicInterestCalculator({super.key});
+
   @override
   _BasicInterestCalculatorState createState() =>
       _BasicInterestCalculatorState();
@@ -19,16 +21,14 @@ class _BasicInterestCalculatorState extends State<BasicInterestCalculator> {
 
   double _simpleInterest = 0.0;
 
-  // Function to calculate Simple Interest
   void _calculateInterest() {
     double principal = double.tryParse(_principalController.text) ?? 0;
     double rate = double.tryParse(_rateController.text) ?? 0;
     double time = double.tryParse(_timeController.text) ?? 0;
 
-    // Simple Interest Calculation
     _simpleInterest = (principal * rate * time) / 100;
 
-    setState(() {}); // Refresh the UI with the new result
+    setState(() {});
   }
 
   @override
@@ -136,6 +136,7 @@ class _BasicInterestCalculatorState extends State<BasicInterestCalculator> {
             const SizedBox(height: 16),
             Text(
               'Simple Interest: ${_simpleInterest.toStringAsFixed(2)}',
+              textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

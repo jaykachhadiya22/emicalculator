@@ -1,18 +1,9 @@
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-class AgeAndGenderSelectionViewController extends GetxController {
-  static AgeAndGenderSelectionViewController get to =>
-      Get.find<AgeAndGenderSelectionViewController>();
-
-  List<int> ageList = List<int>.generate(65, (index) => index + 16);
-  RxInt currentCenterItem = 4.obs;
-  Rx<String> selectedGender = "Male".obs;
-
-  onGenderButtonTap(String value) {
-    selectedGender.value = value;
-    selectedGender.refresh();
-  }
+class OnBoardingThreeViewController extends GetxController {
+  static OnBoardingThreeViewController get to =>
+      Get.find<OnBoardingThreeViewController>();
 
   BannerAd? bannerAd;
   RxBool isAdLoaded = false.obs;
@@ -27,7 +18,7 @@ class AgeAndGenderSelectionViewController extends GetxController {
   loadBannerAd() {
     bannerAd = BannerAd(
       adUnitId: 'ca-app-pub-3940256099942544/6300978111',
-      size: const AdSize(width: 320, height: 250),
+      size: const AdSize(width: 468, height: 60),
       request: const AdRequest(),
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) {

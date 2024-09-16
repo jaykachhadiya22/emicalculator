@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'dart:math';
 
 import '../../../styles/colors.dart';
@@ -22,17 +21,15 @@ class _FixedDepositCalculatorState extends State<FixedDepositCalculator> {
   double _totalAmount = 0.0;
   double _interestAmount = 0.0;
 
-  // Function to calculate Fixed Deposit details
   void _calculateFixedDeposit() {
     double principal = double.tryParse(_principalController.text) ?? 0;
     double rate = double.tryParse(_rateController.text) ?? 0;
     int years = int.tryParse(_yearsController.text) ?? 0;
 
-    // Compound Interest Calculation
     _totalAmount = principal * pow((1 + rate / 100), years);
     _interestAmount = _totalAmount - principal;
 
-    setState(() {}); // Refresh the UI with the new result
+    setState(() {});
   }
 
   @override
@@ -148,6 +145,7 @@ class _FixedDepositCalculatorState extends State<FixedDepositCalculator> {
             ),
             Text(
               'Total Amount After Maturity: ${_totalAmount.toStringAsFixed(2)}',
+              textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -156,6 +154,7 @@ class _FixedDepositCalculatorState extends State<FixedDepositCalculator> {
             ),
             Text(
               'Total Interest Earned: ${_interestAmount.toStringAsFixed(2)}',
+              textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

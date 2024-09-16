@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'dart:math';
 
 import '../../../styles/colors.dart';
@@ -19,20 +18,16 @@ class _RdCalculatorState extends State<RdCalculator> {
 
   double _maturityAmount = 0.0;
 
-  // Function to calculate maturity amount
   void _calculateRd() {
     double principal = double.tryParse(_principalController.text) ?? 0;
     double annualInterestRate =
         double.tryParse(_interestRateController.text) ?? 0;
     double time = double.tryParse(_timeController.text) ?? 0;
 
-    // Convert annual interest rate from percentage to decimal
     double rate = annualInterestRate / 100;
 
-    // Number of times interest is compounded per year (monthly)
     int n = 12;
 
-    // Calculate maturity amount using RD formula
     double maturityAmount = principal *
         ((pow(1 + (rate / n), n * time) - 1) / (rate / n)) *
         (1 + (rate / n));
@@ -91,6 +86,7 @@ class _RdCalculatorState extends State<RdCalculator> {
             const SizedBox(height: 16),
             Text(
               'Maturity Amount: \$${_maturityAmount.toStringAsFixed(2)}',
+              textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

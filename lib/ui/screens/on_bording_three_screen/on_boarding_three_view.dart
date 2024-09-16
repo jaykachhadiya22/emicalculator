@@ -3,19 +3,45 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
+import '../../../services/pre_loade_industrial_ad_first_service.dart';
 import '../../widgets/app.button.dart';
 import '../age_and_gender_selection_screen/age_and_gender_selection_view.dart';
+import 'on_boarding_three_view_controller.dart';
 
 class OnBoardingTreeView extends StatelessWidget {
   const OnBoardingTreeView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Get.put<OnBoardingThreeViewController>(OnBoardingThreeViewController());
     return Scaffold(
       backgroundColor: AppColors.black100,
       body: Stack(
         children: [
+          StreamBuilder(
+            stream: OnBoardingThreeViewController.to.isAdLoaded.stream,
+            builder: (context, snapshot) {
+              return OnBoardingThreeViewController.to.bannerAd == null
+                  ? const SizedBox()
+                  : SafeArea(
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          alignment: Alignment.bottomCenter,
+                          width: double.maxFinite,
+                          height: OnBoardingThreeViewController
+                              .to.bannerAd!.size.height
+                              .toDouble(),
+                          child: AdWidget(
+                            ad: OnBoardingThreeViewController.to.bannerAd!,
+                          ),
+                        ),
+                      ),
+                    ).paddingOnly(top: 10);
+            },
+          ),
           Align(
             alignment: Alignment.topCenter,
             child: SvgPicture.asset(
@@ -66,6 +92,7 @@ class OnBoardingTreeView extends StatelessWidget {
                   ),
                   onPressed: () {
                     Get.to(const AgeAndGenderSelectionView());
+                    PreLoadIndustrialAdFirstService.to.showInterstitialAd();
                   },
                 ),
               ],

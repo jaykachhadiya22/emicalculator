@@ -18,7 +18,7 @@ class OnBoardingFirstViewController extends GetxController {
   loadBannerAd() {
     bannerAd = BannerAd(
       adUnitId: 'ca-app-pub-3940256099942544/6300978111',
-      size: const AdSize(width: 320, height: 50),
+      size: const AdSize(width: 468, height: 60),
       request: const AdRequest(),
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) {

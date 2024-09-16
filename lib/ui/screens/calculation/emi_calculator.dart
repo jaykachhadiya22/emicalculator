@@ -152,6 +152,7 @@ class _EmiCalculatorState extends State<EmiCalculator> {
             const SizedBox(height: 20),
             Text(
               _emiResult,
+              textAlign: TextAlign.center,
               style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,

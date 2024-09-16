@@ -19,18 +19,15 @@ class _GstCalculatorState extends State<GstCalculator> {
   double _gstAmount = 0.0;
   double _totalAmount = 0.0;
 
-  // Function to calculate GST and total amount
   void _calculateGst() {
     double principal = double.tryParse(_principalController.text) ?? 0;
     double gstRate = double.tryParse(_gstRateController.text) ?? 0;
 
-    // Calculate GST Amount
     _gstAmount = (principal * gstRate) / 100;
 
-    // Calculate Total Amount
     _totalAmount = principal + _gstAmount;
 
-    setState(() {}); // Refresh the UI with the new results
+    setState(() {});
   }
 
   @override
@@ -57,7 +54,6 @@ class _GstCalculatorState extends State<GstCalculator> {
           ),
         ),
       ),
-
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -118,6 +114,7 @@ class _GstCalculatorState extends State<GstCalculator> {
             const SizedBox(height: 16),
             Text(
               'GST Amount: \$${_gstAmount.toStringAsFixed(2)}',
+              textAlign: TextAlign.center,
               style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -125,6 +122,7 @@ class _GstCalculatorState extends State<GstCalculator> {
             ),
             Text(
               'Total Amount: \$${_totalAmount.toStringAsFixed(2)}',
+              textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

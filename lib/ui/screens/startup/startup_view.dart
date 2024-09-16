@@ -18,8 +18,8 @@ class StartupView extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.center,
-            child: SvgPicture.asset(
-              "assets/icons/save_money.svg",
+            child: Image.asset(
+              "assets/images/play_store_512.png",
               height: 210,
               width: 210,
             ),

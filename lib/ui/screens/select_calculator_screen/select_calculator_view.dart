@@ -99,7 +99,7 @@ class SelectCalculatorView extends StatelessWidget {
                   const Gap(20),
                   singleListWidget(
                       onTap: () {
-                        Get.to(FixedDepositCalculator());
+                        Get.to(const FixedDepositCalculator());
                       },
                       title: 'Fixed Deposit Calculator',
                       subTitle: "Compute returns on fixed deposits.",
@@ -123,7 +123,7 @@ class SelectCalculatorView extends StatelessWidget {
                   const Gap(20),
                   singleListWidget(
                     onTap: () {
-                      Get.to(GstCalculator());
+                      Get.to(const GstCalculator());
                     },
                     title: 'GST Calculator',
                     subTitle: "Determine GST on your purchases easily.",
@@ -132,7 +132,7 @@ class SelectCalculatorView extends StatelessWidget {
                   const Gap(20),
                   singleListWidget(
                     onTap: () {
-                      Get.to(CashCounter());
+                      Get.to(const CashCounter());
                     },
                     title: 'Cash Counter',
                     subTitle: "Manage and count cash transactions.",

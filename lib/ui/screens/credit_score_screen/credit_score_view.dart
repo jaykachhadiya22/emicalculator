@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../../../styles/colors.dart';
 import '../../widgets/app.button.dart';
+import 'credit_score_view_controller.dart';
 
 class CreditScoreView extends StatefulWidget {
   const CreditScoreView({super.key});
@@ -73,72 +75,95 @@ class _CreditScoreViewState extends State<CreditScoreView>
 
   @override
   Widget build(BuildContext context) {
+    Get.put<CreditScoreViewController>(CreditScoreViewController());
     return Scaffold(
       backgroundColor: AppColors.black100,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Gap(40),
-              const Text(
-                "Make sure someone is available",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 23,
-                  fontWeight: FontWeight.w900,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Gap(40),
+                const Text(
+                  "Make sure someone is available",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 23,
+                    fontWeight: FontWeight.w900,
+                  ),
                 ),
-              ),
-              const Gap(50),
-              singleProgressWidget(
-                title: "Credit score",
-                isCompleted: _isCompleted[0],
-                progressAnimation: _animations[0],
-                isStarted: _isStarted[0],
-              ),
-              const Gap(20),
-              singleProgressWidget(
-                title: "Salary slips",
-                isCompleted: _isCompleted[1],
-                progressAnimation: _animations[1],
-                isStarted: _isStarted[1],
-              ),
-              const Gap(20),
-              singleProgressWidget(
-                title: "Profession",
-                isCompleted: _isCompleted[2],
-                progressAnimation: _animations[2],
-                isStarted: _isStarted[2],
-              ),
-              const Gap(20),
-              singleProgressWidget(
-                title: "Salary",
-                isCompleted: _isCompleted[3],
-                isStarted: _isStarted[3],
-                progressAnimation: _animations[3],
-              ),
-              const Gap(20),
-              singleProgressWidget(
-                title: "Bank Statements",
-                isCompleted: _isCompleted[4],
-                isStarted: _isStarted[4],
-                progressAnimation: _animations[4],
-              ),
-              const Spacer(),
-              AppButton(
-                "Next",
-                buttonTextStyle: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.white,
+                const Gap(50),
+                singleProgressWidget(
+                  title: "Credit score",
+                  isCompleted: _isCompleted[0],
+                  progressAnimation: _animations[0],
+                  isStarted: _isStarted[0],
                 ),
-                onPressed: () => Get.to(const LoanPaymentDurationView()),
-              ),
-              const Gap(15),
-              const Gap(15),
-            ],
+                const Gap(20),
+                singleProgressWidget(
+                  title: "Salary slips",
+                  isCompleted: _isCompleted[1],
+                  progressAnimation: _animations[1],
+                  isStarted: _isStarted[1],
+                ),
+                const Gap(20),
+                singleProgressWidget(
+                  title: "Profession",
+                  isCompleted: _isCompleted[2],
+                  progressAnimation: _animations[2],
+                  isStarted: _isStarted[2],
+                ),
+                const Gap(20),
+                singleProgressWidget(
+                  title: "Salary",
+                  isCompleted: _isCompleted[3],
+                  isStarted: _isStarted[3],
+                  progressAnimation: _animations[3],
+                ),
+                const Gap(20),
+                singleProgressWidget(
+                  title: "Bank Statements",
+                  isCompleted: _isCompleted[4],
+                  isStarted: _isStarted[4],
+                  progressAnimation: _animations[4],
+                ),
+                const Gap(20),
+                StreamBuilder(
+                  stream: CreditScoreViewController.to.isAdLoaded.stream,
+                  builder: (context, snapshot) {
+                    return CreditScoreViewController.to.bannerAd == null
+                        ? const SizedBox()
+                        : SafeArea(
+                            child: Container(
+                              alignment: Alignment.bottomCenter,
+                              width: double.maxFinite,
+                              height: CreditScoreViewController
+                                  .to.bannerAd!.size.height
+                                  .toDouble(),
+                              child: AdWidget(
+                                ad: CreditScoreViewController.to.bannerAd!,
+                              ),
+                            ),
+                          ).paddingOnly(top: 10);
+                  },
+                ),
+                const Gap(20),
+                AppButton(
+                  "Next",
+                  buttonTextStyle: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.white,
+                  ),
+                  onPressed: () => Get.to(const LoanPaymentDurationView()),
+                ),
+                const Gap(15),
+                const Gap(15),
+              ],
+            ),
           ),
         ),
       ),

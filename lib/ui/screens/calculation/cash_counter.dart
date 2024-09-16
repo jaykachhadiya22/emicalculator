@@ -23,7 +23,6 @@ class _CashCounterState extends State<CashCounter> {
 
   double _totalAmount = 0.0;
 
-  // Function to calculate total cash
   void _calculateTotal() {
     double oneDollar = double.tryParse(_oneDollarController.text) ?? 0;
     double fiveDollar = double.tryParse(_fiveDollarController.text) ?? 0;
@@ -32,7 +31,6 @@ class _CashCounterState extends State<CashCounter> {
     double fiftyDollar = double.tryParse(_fiftyDollarController.text) ?? 0;
     double hundredDollar = double.tryParse(_hundredDollarController.text) ?? 0;
 
-    // Calculate total amount
     _totalAmount = (oneDollar * 1) +
         (fiveDollar * 5) +
         (tenDollar * 10) +
@@ -91,6 +89,7 @@ class _CashCounterState extends State<CashCounter> {
             const SizedBox(height: 16),
             Text(
               'Total Amount: \$${_totalAmount.toStringAsFixed(2)}',
+              textAlign: TextAlign.center,
               style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -102,7 +101,6 @@ class _CashCounterState extends State<CashCounter> {
     );
   }
 
-  // Helper method to create text fields
   Widget _buildTextField(TextEditingController controller, String label) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),

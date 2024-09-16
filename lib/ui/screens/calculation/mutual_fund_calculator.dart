@@ -137,6 +137,7 @@ class _MutualFundCalculatorState extends State<MutualFundCalculator> {
             const SizedBox(height: 20),
             Text(
               'Future Value: ${_result.toStringAsFixed(2)}',
+              textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
