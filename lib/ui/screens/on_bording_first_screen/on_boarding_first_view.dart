@@ -6,6 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
+import '../../../services/pre_loade_industrial_ad_first_service.dart';
 import '../../widgets/app.button.dart';
 import 'on_boarding_first_view_controller.dart';
 
@@ -27,7 +28,7 @@ class OnBoardingFirstView extends StatelessWidget {
               return OnBoardingFirstViewController.to.bannerAd == null
                   ? const SizedBox()
                   : SafeArea(
-                    child: Container(
+                      child: Container(
                         alignment: Alignment.bottomCenter,
                         width: double.maxFinite,
                         height: OnBoardingFirstViewController
@@ -37,7 +38,7 @@ class OnBoardingFirstView extends StatelessWidget {
                           ad: OnBoardingFirstViewController.to.bannerAd!,
                         ),
                       ),
-                  ).paddingOnly(top: 10);
+                    ).paddingOnly(top: 10);
             },
           ),
           Align(
@@ -89,6 +90,7 @@ class OnBoardingFirstView extends StatelessWidget {
                     color: AppColors.white,
                   ),
                   onPressed: () {
+                    PreLoadIndustrialAdFirstService.to.showInterstitialAd();
                     Get.to(const OnBoardingTwoView());
                   },
                 ),

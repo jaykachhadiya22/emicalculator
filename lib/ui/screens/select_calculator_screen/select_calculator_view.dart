@@ -4,6 +4,7 @@ import 'package:emicalculator/ui/screens/calculation/cash_counter.dart';
 import 'package:emicalculator/ui/screens/calculation/credit_card_payment.dart';
 import 'package:emicalculator/ui/screens/calculation/emi_calculator.dart';
 import 'package:emicalculator/ui/screens/calculation/fix_deposite.dart';
+import 'package:emicalculator/ui/screens/calculation/formula_controller.dart';
 import 'package:emicalculator/ui/screens/calculation/gst_calculator.dart';
 import 'package:emicalculator/ui/screens/calculation/loan_interest_calculator.dart';
 import 'package:emicalculator/ui/screens/calculation/mutual_fund_calculator.dart';
@@ -20,6 +21,7 @@ class SelectCalculatorView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put<FormulaController>(FormulaController());
     return Scaffold(
       backgroundColor: AppColors.black100,
       body: Column(
@@ -107,7 +109,7 @@ class SelectCalculatorView extends StatelessWidget {
                   const Gap(20),
                   singleListWidget(
                       onTap: () {
-                        Get.to(CreditCardPaymentCalculator());
+                        Get.to(const CreditCardPaymentCalculator());
                       },
                       title: 'Credit Card Payment',
                       subTitle: "manage credit card payments.",
@@ -115,7 +117,7 @@ class SelectCalculatorView extends StatelessWidget {
                   const Gap(20),
                   singleListWidget(
                       onTap: () {
-                        Get.to(BasicInterestCalculator());
+                        Get.to(const BasicInterestCalculator());
                       },
                       title: 'Basic Interest Calculator',
                       subTitle: "Calculate simple interest quickly.",

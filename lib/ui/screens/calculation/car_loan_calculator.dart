@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'dart:math';
 
 import '../../../styles/colors.dart';
 import '../../widgets/app.button.dart';
+import 'formula_controller.dart';
 
 class CarLoanComparison extends StatefulWidget {
   const CarLoanComparison({super.key});
@@ -70,104 +73,130 @@ class _CarLoanComparisonState extends State<CarLoanComparison> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: TextField(
-                controller: _carPriceController,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  labelText: 'Car Price (Full Payment)',
-                  fillColor: Colors.white,
-                  filled: true,
-                  border: InputBorder.none,
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(
-                      color: Colors.black,
-                      width: 1,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Gap(70),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: TextField(
+                  controller: _carPriceController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: 'Car Price (Full Payment)',
+                    fillColor: Colors.white,
+                    filled: true,
+                    border: InputBorder.none,
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: const BorderSide(
+                        color: Colors.black,
+                        width: 1,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 16),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: TextField(
-                controller: _rateController,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  labelText: 'Annual Interest Rate (%)',
-                  fillColor: Colors.white,
-                  filled: true,
-                  border: InputBorder.none,
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(
-                      color: Colors.black,
-                      width: 1,
+              const SizedBox(height: 16),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: TextField(
+                  controller: _rateController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: 'Annual Interest Rate (%)',
+                    fillColor: Colors.white,
+                    filled: true,
+                    border: InputBorder.none,
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: const BorderSide(
+                        color: Colors.black,
+                        width: 1,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 16),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: TextField(
-                controller: _yearsController,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  labelText: 'Loan Duration (Years)',
-                  fillColor: Colors.white,
-                  filled: true,
-                  border: InputBorder.none,
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(
-                      color: Colors.black,
-                      width: 1,
+              const SizedBox(height: 16),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: TextField(
+                  controller: _yearsController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: 'Loan Duration (Years)',
+                    fillColor: Colors.white,
+                    filled: true,
+                    border: InputBorder.none,
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: const BorderSide(
+                        color: Colors.black,
+                        width: 1,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 16),
-            AppButton(
-              "Calculate",
-              width: 150,
-              buttonTextStyle: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: AppColors.white,
+              const SizedBox(height: 16),
+              AppButton(
+                "Calculate",
+                width: 150,
+                buttonTextStyle: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.white,
+                ),
+                onPressed: _calculateLoanVsFullPayment,
               ),
-              onPressed: _calculateLoanVsFullPayment,
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Total Loan Cost: ${_totalLoanCost.toStringAsFixed(2)}',
-              textAlign: TextAlign.center,
-              style: const TextStyle(
+              const SizedBox(height: 16),
+              Text(
+                'Total Loan Cost: ${_totalLoanCost.toStringAsFixed(2)}',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.white),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Difference (Loan vs Full Payment): ${_difference.toStringAsFixed(2)}',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.white),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Difference (Loan vs Full Payment): ${_difference.toStringAsFixed(2)}',
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: AppColors.white,
+                  color: AppColors.white,
+                ),
               ),
-            ),
-          ],
+              const Gap(20),
+              StreamBuilder(
+                stream: FormulaController.to.isAdLoaded.stream,
+                builder: (context, snapshot) {
+                  return FormulaController.to.bannerAd == null
+                      ? const SizedBox()
+                      : SafeArea(
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Container(
+                              alignment: Alignment.bottomCenter,
+                              width: double.maxFinite,
+                              height: FormulaController.to.bannerAd!.size.height
+                                  .toDouble(),
+                              child: AdWidget(
+                                ad: FormulaController.to.bannerAd!,
+                              ),
+                            ),
+                          ),
+                        ).paddingOnly(top: 10);
+                },
+              ),
+              const Gap(20),
+            ],
+          ),
         ),
       ),
     );

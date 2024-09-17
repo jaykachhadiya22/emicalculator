@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'dart:math';
 
 import '../../../styles/colors.dart';
-import '../../widgets/app.button.dart'; // Importing the math library for the pow function
+import '../../widgets/app.button.dart';
+import 'formula_controller.dart'; // Importing the math library for the pow function
 
 class RdCalculator extends StatefulWidget {
   @override
@@ -61,39 +64,65 @@ class _RdCalculatorState extends State<RdCalculator> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _buildTextField(_principalController, 'Monthly Deposit Amount'),
-            const SizedBox(height: 16),
-            _buildTextField(
-                _interestRateController, 'Annual Interest Rate (%)'),
-            const SizedBox(height: 16),
-            _buildTextField(_timeController, 'Time Period (Years)'),
-            const SizedBox(height: 16),
-            AppButton(
-              "Calculate",
-              width: 150,
-              buttonTextStyle: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: AppColors.white,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Gap(50),
+              _buildTextField(_principalController, 'Monthly Deposit Amount'),
+              const SizedBox(height: 16),
+              _buildTextField(
+                  _interestRateController, 'Annual Interest Rate (%)'),
+              const SizedBox(height: 16),
+              _buildTextField(_timeController, 'Time Period (Years)'),
+              const SizedBox(height: 16),
+              AppButton(
+                "Calculate",
+                width: 150,
+                buttonTextStyle: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.white,
+                ),
+                onPressed: _calculateRd,
               ),
-              onPressed: _calculateRd,
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Maturity Amount: \$${_maturityAmount.toStringAsFixed(2)}',
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: AppColors.white,
+              const SizedBox(height: 16),
+              Text(
+                'Maturity Amount: \$${_maturityAmount.toStringAsFixed(2)}',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.white,
+                ),
               ),
-            ),
-          ],
+              const Gap(20),
+              StreamBuilder(
+                stream: FormulaController.to.isAdLoaded.stream,
+                builder: (context, snapshot) {
+                  return FormulaController.to.bannerAd == null
+                      ? const SizedBox()
+                      : SafeArea(
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        alignment: Alignment.bottomCenter,
+                        width: double.maxFinite,
+                        height: FormulaController.to.bannerAd!.size.height
+                            .toDouble(),
+                        child: AdWidget(
+                          ad: FormulaController.to.bannerAd!,
+                        ),
+                      ),
+                    ),
+                  ).paddingOnly(top: 10);
+                },
+              ),
+              const Gap(20),
+            ],
+          ),
         ),
       ),
     );

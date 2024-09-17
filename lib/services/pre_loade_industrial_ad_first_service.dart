@@ -26,10 +26,12 @@ class PreLoadIndustrialAdFirstService {
             onAdFailedToShowFullScreenContent:
                 (InterstitialAd ad, AdError error) {
               ad.dispose();
+              loadInterstitialAd();
             },
           );
         },
         onAdFailedToLoad: (LoadAdError error) {
+          loadInterstitialAd();
           debugPrint('InterstitialAd failed to load: $error');
         },
       ),

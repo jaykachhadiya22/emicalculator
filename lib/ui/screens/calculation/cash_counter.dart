@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../../../styles/colors.dart';
 import '../../widgets/app.button.dart';
+import 'formula_controller.dart';
 
 class CashCounter extends StatefulWidget {
   const CashCounter({super.key});
@@ -65,37 +68,63 @@ class _CashCounterState extends State<CashCounter> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            _buildTextField(_oneDollarController, '1 Dollar'),
-            _buildTextField(_fiveDollarController, '5 Dollars'),
-            _buildTextField(_tenDollarController, '10 Dollars'),
-            _buildTextField(_twentyDollarController, '20 Dollars'),
-            _buildTextField(_fiftyDollarController, '50 Dollars'),
-            _buildTextField(_hundredDollarController, '100 Dollars'),
-            const SizedBox(height: 16),
-            AppButton(
-              "Calculate",
-              width: 150,
-              buttonTextStyle: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: AppColors.white,
-              ),
-              onPressed: _calculateTotal,
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Total Amount: \$${_totalAmount.toStringAsFixed(2)}',
-              textAlign: TextAlign.center,
-              style: const TextStyle(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              const Gap(20),
+              _buildTextField(_oneDollarController, '1 Dollar'),
+              _buildTextField(_fiveDollarController, '5 Dollars'),
+              _buildTextField(_tenDollarController, '10 Dollars'),
+              _buildTextField(_twentyDollarController, '20 Dollars'),
+              _buildTextField(_fiftyDollarController, '50 Dollars'),
+              _buildTextField(_hundredDollarController, '100 Dollars'),
+              const SizedBox(height: 16),
+              AppButton(
+                "Calculate",
+                width: 150,
+                buttonTextStyle: const TextStyle(
                   fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.white),
-            ),
-          ],
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.white,
+                ),
+                onPressed: _calculateTotal,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Total Amount: \$${_totalAmount.toStringAsFixed(2)}',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.white),
+              ),
+              const Gap(20),
+              StreamBuilder(
+                stream: FormulaController.to.isAdLoaded.stream,
+                builder: (context, snapshot) {
+                  return FormulaController.to.bannerAd == null
+                      ? const SizedBox()
+                      : SafeArea(
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        alignment: Alignment.bottomCenter,
+                        width: double.maxFinite,
+                        height: FormulaController.to.bannerAd!.size.height
+                            .toDouble(),
+                        child: AdWidget(
+                          ad: FormulaController.to.bannerAd!,
+                        ),
+                      ),
+                    ),
+                  ).paddingOnly(top: 10);
+                },
+              ),
+              const Gap(20),
+            ],
+          ),
         ),
       ),
     );
