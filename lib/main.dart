@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: "fun cross",
+      title: "Loan Emi Calc",
       initialBinding: AppBindings(),
       theme: ThemeData(
         fontFamily: 'Poppins',
