@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class AppOpenAdManagerService {
@@ -30,7 +29,7 @@ class AppOpenAdManagerService {
         onAdDismissedFullScreenContent: (ad) {
           isAdShowing = false;
           _appOpenAd = null;
-          // loadAd();
+          loadAd();
         },
         onAdFailedToShowFullScreenContent: (ad, error) {
           isAdShowing = false;

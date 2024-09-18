@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-class PreLoadIndustrialAdFirstService {
+import 'app_open_ad_manager_service.dart';
+
+class PreLoadIndustrialAdFirstService with WidgetsBindingObserver {
   static PreLoadIndustrialAdFirstService get to =>
       Get.find<PreLoadIndustrialAdFirstService>();
 
@@ -10,7 +12,7 @@ class PreLoadIndustrialAdFirstService {
   bool isInterstitialAdReady = false;
 
   Future<void> loadInterstitialAd() async {
-   await InterstitialAd.load(
+    await InterstitialAd.load(
       adUnitId: 'ca-app-pub-3940256099942544/1033173712',
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
@@ -19,9 +21,11 @@ class PreLoadIndustrialAdFirstService {
           isInterstitialAdReady = true;
 
           interstitialAd?.fullScreenContentCallback = FullScreenContentCallback(
-            onAdDismissedFullScreenContent: (InterstitialAd ad) {
+            onAdDismissedFullScreenContent: (InterstitialAd ad) async {
               ad.dispose();
               loadInterstitialAd();
+              await Future.delayed(const Duration(seconds: 2));
+              WidgetsBinding.instance.addObserver(this);
             },
             onAdFailedToShowFullScreenContent:
                 (InterstitialAd ad, AdError error) {
@@ -40,10 +44,18 @@ class PreLoadIndustrialAdFirstService {
 
   void showInterstitialAd() {
     if (isInterstitialAdReady) {
+      WidgetsBinding.instance.removeObserver(this);
       interstitialAd?.show();
     } else {
       loadInterstitialAd();
       debugPrint('Interstitial ad is not ready yet.');
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      AppOpenAdManagerService.to.showAdIfAvailable();
     }
   }
 }

@@ -1,15 +1,18 @@
 import 'package:emicalculator/styles/colors.dart';
 import 'package:emicalculator/ui/screens/startup/startup_view_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 import '../../../services/app_open_ad_manager_service.dart';
 
-class StartupView extends StatelessWidget {
+class StartupView extends StatefulWidget {
   const StartupView({super.key});
 
+  @override
+  State<StartupView> createState() => _StartupViewState();
+}
+
+class _StartupViewState extends State<StartupView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

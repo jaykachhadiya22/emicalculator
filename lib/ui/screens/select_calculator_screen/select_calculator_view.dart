@@ -112,7 +112,7 @@ class SelectCalculatorView extends StatelessWidget {
                         Get.to(const CreditCardPaymentCalculator());
                       },
                       title: 'Credit Card Payment',
-                      subTitle: "manage credit card payments.",
+                      subTitle: "Manage credit card payments.",
                       imagePath: "credit_card_payment.svg"),
                   const Gap(20),
                   singleListWidget(
