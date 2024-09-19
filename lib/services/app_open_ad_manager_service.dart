@@ -1,5 +1,8 @@
+import 'package:emicalculator/services/firebase_remote_config_data_service.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+
+import '../data/remote_config_response_data_model.dart';
 
 class AppOpenAdManagerService {
   static AppOpenAdManagerService get to => Get.find<AppOpenAdManagerService>();
@@ -8,8 +11,11 @@ class AppOpenAdManagerService {
   RxBool isAdAvailable = false.obs;
 
   Future<void> loadAd() async {
+    RemoteConfigResponseDataModel? value =
+        FirebaseRemoteConfigDataService.to.responseDataModel;
+    if (value == null) return;
     await AppOpenAd.load(
-      adUnitId: 'ca-app-pub-3940256099942544/9257395921',
+      adUnitId: value.appOpenAdId,
       request: const AdRequest(),
       adLoadCallback: AppOpenAdLoadCallback(
         onAdLoaded: (ad) {
@@ -17,6 +23,7 @@ class AppOpenAdManagerService {
           isAdAvailable.value = true;
         },
         onAdFailedToLoad: (error) {
+          print("GOOGLE AD LOADE PROBLEM  : ${error}");
           isAdAvailable.value = false;
         },
       ),
@@ -24,6 +31,9 @@ class AppOpenAdManagerService {
   }
 
   void showAdIfAvailable() {
+    RemoteConfigResponseDataModel? value =
+        FirebaseRemoteConfigDataService.to.responseDataModel;
+    if (value == null) return;
     if (isAdAvailable.value && !isAdShowing) {
       _appOpenAd?.fullScreenContentCallback = FullScreenContentCallback(
         onAdDismissedFullScreenContent: (ad) {

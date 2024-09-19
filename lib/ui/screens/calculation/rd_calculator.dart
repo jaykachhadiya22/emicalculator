@@ -1,9 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'dart:math';
 
 import '../../../styles/colors.dart';
 import '../../widgets/app.button.dart';
@@ -37,6 +38,15 @@ class _RdCalculatorState extends State<RdCalculator> {
 
     setState(() {
       _maturityAmount = maturityAmount;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await Future.delayed(const Duration(milliseconds: 500));
+      setState(() {});
     });
   }
 
@@ -105,19 +115,19 @@ class _RdCalculatorState extends State<RdCalculator> {
                   return FormulaController.to.bannerAd == null
                       ? const SizedBox()
                       : SafeArea(
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        alignment: Alignment.bottomCenter,
-                        width: double.maxFinite,
-                        height: FormulaController.to.bannerAd!.size.height
-                            .toDouble(),
-                        child: AdWidget(
-                          ad: FormulaController.to.bannerAd!,
-                        ),
-                      ),
-                    ),
-                  ).paddingOnly(top: 10);
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Container(
+                              alignment: Alignment.bottomCenter,
+                              width: double.maxFinite,
+                              height: FormulaController.to.bannerAd!.size.height
+                                  .toDouble(),
+                              child: AdWidget(
+                                ad: FormulaController.to.bannerAd!,
+                              ),
+                            ),
+                          ),
+                        ).paddingOnly(top: 10);
                 },
               ),
               const Gap(20),

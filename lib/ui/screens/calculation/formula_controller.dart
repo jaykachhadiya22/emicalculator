@@ -1,6 +1,9 @@
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
+import '../../../data/remote_config_response_data_model.dart';
+import '../../../services/firebase_remote_config_data_service.dart';
+
 class FormulaController extends GetxController {
   static FormulaController get to => Get.find<FormulaController>();
 
@@ -22,8 +25,11 @@ class FormulaController extends GetxController {
   }
 
   loadBannerAd() {
+    RemoteConfigResponseDataModel? value =
+        FirebaseRemoteConfigDataService.to.responseDataModel;
+    if (value == null) return;
     bannerAd = BannerAd(
-      adUnitId: 'ca-app-pub-3940256099942544/6300978111',
+      adUnitId: value.bannerAdId,
       size: const AdSize(width: 320, height: 250),
       request: const AdRequest(),
       listener: BannerAdListener(

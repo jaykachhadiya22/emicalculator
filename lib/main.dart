@@ -1,4 +1,6 @@
+import 'package:emicalculator/firebase_options.dart';
 import 'package:emicalculator/services/app_open_ad_manager_service.dart';
+import 'package:emicalculator/services/firebase_remote_config_data_service.dart';
 import 'package:emicalculator/services/pre_loade_industrial_ad_first_service.dart';
 import 'package:emicalculator/ui/screens/startup/startup_view.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -12,23 +14,26 @@ import 'app/app.bindings.dart';
 import 'data/local/get_storage.dart';
 
 Future<void> main() async {
-  var devices = [
-    "FEFB761BA483F7737E64F2AA08C14616",
-    "66EF7F968129459770DF7F4C81B69035"
-  ];
+  // var devices = [
+  //   "FEFB761BA483F7737E64F2AA08C14616",
+  //   "66EF7F968129459770DF7F4C81B69035"
+  // ];
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   MobileAds.instance.initialize();
   await GetStorage.init();
 
-  RequestConfiguration requestConfiguration =
-      RequestConfiguration(testDeviceIds: devices);
-  MobileAds.instance.updateRequestConfiguration(requestConfiguration);
+  // RequestConfiguration requestConfiguration =
+  //     RequestConfiguration(testDeviceIds: devices);
+  // MobileAds.instance.updateRequestConfiguration(requestConfiguration);
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]).then((_) async {
+    Get.put<FirebaseRemoteConfigDataService>(FirebaseRemoteConfigDataService());
+    await FirebaseRemoteConfigDataService.to.initialize();
+    await FirebaseRemoteConfigDataService.to.getRemoteConfigData();
     Get.put<AppOpenAdManagerService>(AppOpenAdManagerService());
     Get.put<PreLoadIndustrialAdFirstService>(PreLoadIndustrialAdFirstService());
     Get.put<GetStorageService>(GetStorageService());

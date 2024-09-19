@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:663179251831:android:692fb76109bd50ef9d7672",
+        "mobilesdk_app_id": "1:663179251831:android:0f33156a16944abc9d7672",
         "android_client_info": {
-          "package_name": "com.example.emicalculator"
+          "package_name": "com.loanemicalc.app"
         }
       },
       "oauth_client": [],

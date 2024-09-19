@@ -1,4 +1,4 @@
-package com.example.emicalculator
+package com.loanemicalc.app
 
 import io.flutter.embedding.android.FlutterActivity
 

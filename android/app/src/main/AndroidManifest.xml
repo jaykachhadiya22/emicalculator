@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:enableOnBackInvokedCallback="true"
@@ -35,7 +36,7 @@
             android:value="2" />
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-1128803954159102~3098579933"/>
+            android:value="ca-app-pub-1685282701792040~3560155490"/>
 
         <meta-data
             android:name="com.google.android.gms.ads.AD_MANAGER_APP"

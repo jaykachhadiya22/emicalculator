@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-class LoanPaymentDurationViewController extends GetxController {
+import '../../../data/remote_config_response_data_model.dart';
+import '../../../services/firebase_remote_config_data_service.dart';
 
+class LoanPaymentDurationViewController extends GetxController {
   static LoanPaymentDurationViewController get to =>
       Get.find<LoanPaymentDurationViewController>();
 
@@ -17,8 +19,11 @@ class LoanPaymentDurationViewController extends GetxController {
   }
 
   loadBannerAd() {
+    RemoteConfigResponseDataModel? value =
+        FirebaseRemoteConfigDataService.to.responseDataModel;
+    if (value == null) return;
     bannerAd = BannerAd(
-      adUnitId: 'ca-app-pub-3940256099942544/6300978111',
+      adUnitId: value.bannerAdId,
       size: const AdSize(width: 320, height: 250),
       request: const AdRequest(),
       listener: BannerAdListener(
@@ -29,7 +34,7 @@ class LoanPaymentDurationViewController extends GetxController {
           ad.dispose();
           Future.delayed(
             const Duration(seconds: 5),
-                () {
+            () {
               loadBannerAd();
             },
           );

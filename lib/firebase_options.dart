@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyA7j0H94eMdrJR_ppjjOQN4Um4xcUFc6-8',
-    appId: '1:663179251831:android:692fb76109bd50ef9d7672',
+    appId: '1:663179251831:android:0f33156a16944abc9d7672',
     messagingSenderId: '663179251831',
     projectId: 'loanemicalc-2f66f',
     storageBucket: 'loanemicalc-2f66f.appspot.com',
@@ -63,6 +63,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '663179251831',
     projectId: 'loanemicalc-2f66f',
     storageBucket: 'loanemicalc-2f66f.appspot.com',
-    iosBundleId: 'com.example.emicalculator',
+    iosBundleId: 'com.loanemicalc.app',
   );
 }

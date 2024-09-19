@@ -1,11 +1,10 @@
+import 'dart:math';
+
 import 'package:emicalculator/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'dart:math';
-
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../../widgets/app.button.dart';
@@ -33,6 +32,15 @@ class _MutualFundCalculatorState extends State<MutualFundCalculator> {
     _result = principal * pow((1 + (rate / 100)), years);
 
     setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await Future.delayed(const Duration(milliseconds: 500));
+      setState(() {});
+    });
   }
 
   @override

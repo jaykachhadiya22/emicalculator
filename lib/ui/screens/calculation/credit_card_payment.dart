@@ -42,6 +42,15 @@ class _CreditCardPaymentCalculatorState
   }
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await Future.delayed(const Duration(milliseconds: 500));
+      setState(() {});
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.black100,
@@ -192,19 +201,19 @@ class _CreditCardPaymentCalculatorState
                   return FormulaController.to.bannerAd == null
                       ? const SizedBox()
                       : SafeArea(
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        alignment: Alignment.bottomCenter,
-                        width: double.maxFinite,
-                        height: FormulaController.to.bannerAd!.size.height
-                            .toDouble(),
-                        child: AdWidget(
-                          ad: FormulaController.to.bannerAd!,
-                        ),
-                      ),
-                    ),
-                  ).paddingOnly(top: 10);
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Container(
+                              alignment: Alignment.bottomCenter,
+                              width: double.maxFinite,
+                              height: FormulaController.to.bannerAd!.size.height
+                                  .toDouble(),
+                              child: AdWidget(
+                                ad: FormulaController.to.bannerAd!,
+                              ),
+                            ),
+                          ),
+                        ).paddingOnly(top: 10);
                 },
               ),
               const Gap(20),

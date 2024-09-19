@@ -1,6 +1,9 @@
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
+import '../../../data/remote_config_response_data_model.dart';
+import '../../../services/firebase_remote_config_data_service.dart';
+
 class OnBoardingFirstViewController extends GetxController {
   static OnBoardingFirstViewController get to =>
       Get.find<OnBoardingFirstViewController>();
@@ -16,8 +19,12 @@ class OnBoardingFirstViewController extends GetxController {
   }
 
   loadBannerAd() {
+    RemoteConfigResponseDataModel? value =
+        FirebaseRemoteConfigDataService.to.responseDataModel;
+
+    if (value == null) return;
     bannerAd = BannerAd(
-      adUnitId: 'ca-app-pub-3940256099942544/6300978111',
+      adUnitId: value.bannerAdId,
       size: const AdSize(width: 468, height: 60),
       request: const AdRequest(),
       listener: BannerAdListener(

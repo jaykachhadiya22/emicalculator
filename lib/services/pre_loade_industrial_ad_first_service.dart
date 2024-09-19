@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
+import '../data/remote_config_response_data_model.dart';
 import 'app_open_ad_manager_service.dart';
+import 'firebase_remote_config_data_service.dart';
 
 class PreLoadIndustrialAdFirstService with WidgetsBindingObserver {
   static PreLoadIndustrialAdFirstService get to =>
@@ -12,8 +14,11 @@ class PreLoadIndustrialAdFirstService with WidgetsBindingObserver {
   bool isInterstitialAdReady = false;
 
   Future<void> loadInterstitialAd() async {
+    RemoteConfigResponseDataModel? value =
+        FirebaseRemoteConfigDataService.to.responseDataModel;
+    if (value == null) return;
     await InterstitialAd.load(
-      adUnitId: 'ca-app-pub-3940256099942544/1033173712',
+      adUnitId: value.industrialAdId,
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (InterstitialAd ad) {
@@ -35,17 +40,20 @@ class PreLoadIndustrialAdFirstService with WidgetsBindingObserver {
           );
         },
         onAdFailedToLoad: (LoadAdError error) {
-          loadInterstitialAd();
           debugPrint('InterstitialAd failed to load: $error');
         },
       ),
     );
   }
 
-  void showInterstitialAd() {
+  Future<void> showInterstitialAd() async {
+    RemoteConfigResponseDataModel? value =
+        FirebaseRemoteConfigDataService.to.responseDataModel;
+    if (value == null) return;
     if (isInterstitialAdReady) {
-      WidgetsBinding.instance.removeObserver(this);
       interstitialAd?.show();
+      await Future.delayed(const Duration(seconds: 2));
+      WidgetsBinding.instance.removeObserver(this);
     } else {
       loadInterstitialAd();
       debugPrint('Interstitial ad is not ready yet.');
