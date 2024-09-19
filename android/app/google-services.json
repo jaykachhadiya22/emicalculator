@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "663179251831",
+    "project_id": "loanemicalc-2f66f",
+    "storage_bucket": "loanemicalc-2f66f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663179251831:android:692fb76109bd50ef9d7672",
+        "android_client_info": {
+          "package_name": "com.example.emicalculator"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7j0H94eMdrJR_ppjjOQN4Um4xcUFc6-8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

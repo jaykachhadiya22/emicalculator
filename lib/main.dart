@@ -1,6 +1,7 @@
 import 'package:emicalculator/services/app_open_ad_manager_service.dart';
 import 'package:emicalculator/services/pre_loade_industrial_ad_first_service.dart';
 import 'package:emicalculator/ui/screens/startup/startup_view.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,8 @@ Future<void> main() async {
     "66EF7F968129459770DF7F4C81B69035"
   ];
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   MobileAds.instance.initialize();
   await GetStorage.init();
 
