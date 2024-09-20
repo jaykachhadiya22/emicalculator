@@ -63,76 +63,77 @@ class AgeAndGenderSelectionView extends StatelessWidget {
                   ),
                   const Gap(20),
                   StreamBuilder(
-                      stream: AgeAndGenderSelectionViewController
-                          .to.selectedGender.stream,
-                      builder: (context, snapshot) {
-                        return Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            GestureDetector(
-                              onTap: () => AgeAndGenderSelectionViewController.to
-                                  .onGenderButtonTap("Male"),
-                              child: Column(
-                                children: [
-                                  ClipOval(
-                                    child: Image.asset(
-                                      "assets/images/male_avtar.png",
-                                      height: 120,
-                                      width: 120,
-                                      fit: BoxFit.cover,
-                                    ),
+                    stream: AgeAndGenderSelectionViewController
+                        .to.selectedGender.stream,
+                    builder: (context, snapshot) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          GestureDetector(
+                            onTap: () => AgeAndGenderSelectionViewController.to
+                                .onGenderButtonTap("Male"),
+                            child: Column(
+                              children: [
+                                ClipOval(
+                                  child: Image.asset(
+                                    "assets/images/male_avtar.png",
+                                    height: 120,
+                                    width: 120,
+                                    fit: BoxFit.cover,
                                   ),
-                                  const Gap(20),
-                                  Text(
-                                    "Male",
-                                    style: TextStyle(
-                                      color: AgeAndGenderSelectionViewController
-                                                  .to.selectedGender.value ==
-                                              "Male"
-                                          ? AppColors.orange
-                                          : AppColors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700,
-                                    ),
+                                ),
+                                const Gap(20),
+                                Text(
+                                  "Male",
+                                  style: TextStyle(
+                                    color: AgeAndGenderSelectionViewController
+                                                .to.selectedGender.value ==
+                                            "Male"
+                                        ? AppColors.orange
+                                        : AppColors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                            GestureDetector(
-                              onTap: () => AgeAndGenderSelectionViewController.to
-                                  .onGenderButtonTap("Female"),
-                              child: Column(
-                                children: [
-                                  ClipOval(
-                                    child: Image.asset(
-                                      "assets/images/female_avtar.jpg",
-                                      height: 120,
-                                      width: 120,
-                                      fit: BoxFit.cover,
-                                    ),
+                          ),
+                          GestureDetector(
+                            onTap: () => AgeAndGenderSelectionViewController.to
+                                .onGenderButtonTap("Female"),
+                            child: Column(
+                              children: [
+                                ClipOval(
+                                  child: Image.asset(
+                                    "assets/images/female_avtar.jpg",
+                                    height: 120,
+                                    width: 120,
+                                    fit: BoxFit.cover,
                                   ),
-                                  const Gap(20),
-                                  Text(
-                                    "Female",
-                                    style: TextStyle(
-                                      color: AgeAndGenderSelectionViewController
-                                                  .to.selectedGender.value ==
-                                              "Female"
-                                          ? AppColors.orange
-                                          : AppColors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700,
-                                    ),
+                                ),
+                                const Gap(20),
+                                Text(
+                                  "Female",
+                                  style: TextStyle(
+                                    color: AgeAndGenderSelectionViewController
+                                                .to.selectedGender.value ==
+                                            "Female"
+                                        ? AppColors.orange
+                                        : AppColors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                          ],
-                        );
-                      }),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
                   StreamBuilder(
-                    stream:
-                        AgeAndGenderSelectionViewController.to.isAdLoaded.stream,
+                    stream: AgeAndGenderSelectionViewController
+                        .to.isAdLoaded.stream,
                     builder: (context, snapshot) {
                       return AgeAndGenderSelectionViewController.to.bannerAd ==
                               null

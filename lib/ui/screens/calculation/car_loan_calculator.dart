@@ -172,7 +172,7 @@ class _CarLoanComparisonState extends State<CarLoanComparison> {
                     fontWeight: FontWeight.bold,
                     color: AppColors.white),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 8),
               Text(
                 'Difference (Loan vs Full Payment): ${_difference.toStringAsFixed(2)}',
                 textAlign: TextAlign.center,

@@ -59,10 +59,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCLxMM_LV653V_Cqd0WJ9UeMKerHf7k5l4',
-    appId: '1:663179251831:ios:c0671fffc4f2542e9d7672',
+    appId: '1:663179251831:ios:8dff0dbcefb6448d9d7672',
     messagingSenderId: '663179251831',
     projectId: 'loanemicalc-2f66f',
     storageBucket: 'loanemicalc-2f66f.appspot.com',
     iosBundleId: 'com.loanemicalc.app',
   );
+
 }
