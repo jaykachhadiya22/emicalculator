@@ -1,6 +1,5 @@
 import 'package:emicalculator/ui/screens/calculation/basic_interest.dart';
 import 'package:emicalculator/ui/screens/calculation/car_loan_calculator.dart';
-import 'package:emicalculator/ui/screens/calculation/cash_counter.dart';
 import 'package:emicalculator/ui/screens/calculation/credit_card_payment.dart';
 import 'package:emicalculator/ui/screens/calculation/emi_calculator.dart';
 import 'package:emicalculator/ui/screens/calculation/fix_deposite.dart';
@@ -46,7 +45,7 @@ class SelectCalculatorView extends StatelessWidget {
                   ),
                   Gap(3),
                   Text(
-                    "Compound Interest Calculator",
+                    "Easily Calculate Any Loan Emi",
                     style: TextStyle(
                       color: AppColors.white,
                       fontWeight: FontWeight.w700,
@@ -69,7 +68,7 @@ class SelectCalculatorView extends StatelessWidget {
                     },
                     title: 'EMI Calculator',
                     imagePath: "calculator.svg",
-                    subTitle: "A tool to calculate loan EMI easily",
+                    subTitle: "calculate loan EMI easily",
                   ),
                   const Gap(20),
                   singleListWidget(
@@ -104,7 +103,7 @@ class SelectCalculatorView extends StatelessWidget {
                         Get.to(const FixedDepositCalculator());
                       },
                       title: 'Fixed Deposit Calculator',
-                      subTitle: "Compute returns on fixed deposits.",
+                      subTitle: "Calculate returns on fixed deposits.",
                       imagePath: "fix_deposit.svg"),
                   const Gap(20),
                   singleListWidget(
@@ -112,7 +111,7 @@ class SelectCalculatorView extends StatelessWidget {
                         Get.to(const CreditCardPaymentCalculator());
                       },
                       title: 'Credit Card Payment',
-                      subTitle: "Manage credit card payments.",
+                      subTitle: "Calculate estimate credit card bill payments.",
                       imagePath: "credit_card_payment.svg"),
                   const Gap(20),
                   singleListWidget(
@@ -130,15 +129,6 @@ class SelectCalculatorView extends StatelessWidget {
                     title: 'GST Calculator',
                     subTitle: "Determine GST on your purchases easily.",
                     imagePath: "gst_calculator.svg",
-                  ),
-                  const Gap(20),
-                  singleListWidget(
-                    onTap: () {
-                      Get.to(const CashCounter());
-                    },
-                    title: 'Cash Counter',
-                    subTitle: "Manage and count cash transactions.",
-                    imagePath: "cash_counter.svg",
                   ),
                   const Gap(20),
                   singleListWidget(

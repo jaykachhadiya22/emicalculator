@@ -19,12 +19,12 @@ class StartupViewController extends GetxController {
       return;
     }
     AppOpenAdManagerService.to.showAdIfAvailable();
-    if (value.isOnlyShowApp) {
-      await Future.delayed(const Duration(milliseconds: 200));
-      Get.offAll(const SelectCalculatorView());
-    } else {
+    // if (value.isOnlyShowApp) {
+    //   await Future.delayed(const Duration(milliseconds: 200));
+    //   Get.offAll(const SelectCalculatorView());
+    // } else {
       await Future.delayed(const Duration(milliseconds: 200));
       Get.offAll(const OnBoardingFirstView());
-    }
+   // }
   }
 }

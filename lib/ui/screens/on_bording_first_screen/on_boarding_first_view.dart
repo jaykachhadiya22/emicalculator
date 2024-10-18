@@ -43,12 +43,12 @@ class OnBoardingFirstView extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.topCenter,
-            child: SvgPicture.asset(
-              "assets/icons/save_money.svg",
+            child: Image.asset(
+              "assets/images/vecteezy_calculator-budget-icon_50737541.png",
               height: 210,
               width: 210,
             ),
-          ).paddingOnly(top: 100),
+          ).paddingOnly(top: 120),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
@@ -90,7 +90,9 @@ class OnBoardingFirstView extends StatelessWidget {
                     color: AppColors.white,
                   ),
                   onPressed: () {
-                    PreLoadIndustrialAdFirstService.to.showInterstitialAd();
+                    if (!OnBoardingFirstViewController.to.isOnlyShowApp.value) {
+                      PreLoadIndustrialAdFirstService.to.showInterstitialAd();
+                    }
                     Get.to(const OnBoardingTwoView());
                   },
                 ),

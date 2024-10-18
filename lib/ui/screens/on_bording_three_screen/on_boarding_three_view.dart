@@ -8,6 +8,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../../../services/pre_loade_industrial_ad_first_service.dart';
 import '../../widgets/app.button.dart';
 import '../age_and_gender_selection_screen/age_and_gender_selection_view.dart';
+import '../select_calculator_screen/select_calculator_view.dart';
 import 'on_boarding_three_view_controller.dart';
 
 class OnBoardingTreeView extends StatelessWidget {
@@ -15,11 +16,14 @@ class OnBoardingTreeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put<OnBoardingThreeViewController>(OnBoardingThreeViewController());
+    final controller =
+        Get.put<OnBoardingThreeViewController>(OnBoardingThreeViewController());
     return WillPopScope(
       onWillPop: () async {
         Get.back();
-        PreLoadIndustrialAdFirstService.to.showInterstitialAd();
+        if (!controller.isOnlyShowApp.value) {
+          PreLoadIndustrialAdFirstService.to.showInterstitialAd();
+        }
         return false;
       },
       child: Scaffold(
@@ -63,7 +67,7 @@ class OnBoardingTreeView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    "Smart\nLoan Planning",
+                    "Smart Loan\nEmi Planning",
                     style: TextStyle(
                       height: 1.2,
                       fontSize: 38,
@@ -97,8 +101,14 @@ class OnBoardingTreeView extends StatelessWidget {
                       color: AppColors.white,
                     ),
                     onPressed: () {
-                      Get.to(const AgeAndGenderSelectionView());
-                      PreLoadIndustrialAdFirstService.to.showInterstitialAd();
+                      bool value =
+                          !OnBoardingThreeViewController.to.isOnlyShowApp.value;
+                      if (!value) {
+                        Get.to(const SelectCalculatorView());
+                      } else {
+                        Get.to(const AgeAndGenderSelectionView());
+                        PreLoadIndustrialAdFirstService.to.showInterstitialAd();
+                      }
                     },
                   ),
                 ],

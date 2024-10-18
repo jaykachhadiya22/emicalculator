@@ -10,11 +10,17 @@ class OnBoardingThreeViewController extends GetxController {
 
   BannerAd? bannerAd;
   RxBool isAdLoaded = false.obs;
+  RxBool isOnlyShowApp = true.obs;
 
   @override
   Future<void> onInit() async {
     // TODO: implement onInit
-    await loadBannerAd();
+    RemoteConfigResponseDataModel? value =
+        FirebaseRemoteConfigDataService.to.responseDataModel;
+    isOnlyShowApp.value = value?.isOnlyShowApp ?? true;
+    if (!isOnlyShowApp.value) {
+      await loadBannerAd();
+    }
     super.onInit();
   }
 

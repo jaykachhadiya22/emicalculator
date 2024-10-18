@@ -15,11 +15,14 @@ class OnBoardingTwoView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put<OnBoardingTwoViewController>(OnBoardingTwoViewController());
+    final controller =
+        Get.put<OnBoardingTwoViewController>(OnBoardingTwoViewController());
     return WillPopScope(
       onWillPop: () async {
         Get.back();
-        PreLoadIndustrialAdFirstService.to.showInterstitialAd();
+        if (!controller.isOnlyShowApp.value) {
+          PreLoadIndustrialAdFirstService.to.showInterstitialAd();
+        }
         return false;
       },
       child: Scaffold(
@@ -46,6 +49,9 @@ class OnBoardingTwoView extends StatelessWidget {
                         ).paddingOnly(top: 10);
                 },
               ),
+              !OnBoardingTwoViewController.to.isOnlyShowApp.value
+                  ? const SizedBox()
+                  : const Gap(150),
               Align(
                 alignment: Alignment.topCenter,
                 child: SvgPicture.asset(
@@ -97,7 +103,11 @@ class OnBoardingTwoView extends StatelessWidget {
                       ),
                       onPressed: () {
                         Get.to(const OnBoardingTreeView());
-                        PreLoadIndustrialAdFirstService.to.showInterstitialAd();
+                        if (!OnBoardingTwoViewController
+                            .to.isOnlyShowApp.value) {
+                          PreLoadIndustrialAdFirstService.to
+                              .showInterstitialAd();
+                        }
                       },
                     ),
                   ],
